@@ -20,7 +20,6 @@ input[type="number"] {
   font-family: 'Montserrat', sans-serif;
   background-color: #185875;
   overflow: hidden;
-  margin-bottom: 20px;
   box-shadow: 0 3px 20px rgba(0,0,0,0.2);
 }
 
@@ -62,22 +61,13 @@ input, .picker{
   color: #A7A1AE;
 }
 
-h1 {
+.table-headline {
+  margin: 15px 0;
   font-size: 3em;
   font-weight: 300;
   line-height: 1em;
   text-align: center;
   color: #4DC3FA;
-}
-
-h2 {
-  font-size: 1em;
-  font-weight: 300;
-  text-align: center;
-  display: block;
-  line-height: 1em;
-  padding-bottom: 2em;
-  color: #FB667A;
 }
 
 h2 a {
@@ -95,7 +85,7 @@ h2 a {
   color: #FFF842;
 }
 
-.container th h1 {
+table th h1 {
   font-weight: bold;
   padding: 10px 0;
   font-size: 1em;
@@ -103,11 +93,11 @@ h2 a {
   color: #185875;
 }
 
-.container td{
+table td{
   max-width: 50px;
 }
 
-.container td input, .picker{
+table td input, .picker{
   font-weight: normal;
   font-size: 1em;
   -webkit-box-shadow: 0 2px 2px -2px #0E1119;
@@ -116,43 +106,47 @@ h2 a {
 }
 
 .container {
-  text-align: left;
-  overflow: hidden;
   width: 90%;
   margin: 0 auto;
+}
+
+table {
+  width: 100%;
   display: table;
+  text-align: left;
+  overflow: hidden;
 }
 
 /* Background-color of the odd rows */
-.container tr:nth-child(odd) input, .container tr:nth-child(odd) .picker{
+ tr:nth-child(odd) input, table tr:nth-child(odd) .picker{
   background-color: #323C50;
 }
 
-.container tr:nth-child(even) input, .container tr:nth-child(even) .picker {
+table tr:nth-child(even) input, table tr:nth-child(even) .picker {
   background-color: #2C3446;
 }
 
-.container th {
+table th {
   max-width: 50px;
   background-color: #1F2739;
 }
 
-.container .large-field {
+table .large-field {
   max-width: 100px;
 }
 
-.container td:first-child input {
+table td:first-child input {
   color: #FB667A;
 }
 
-.container tr input:hover{
+table tr input:hover{
   background-color: #464A52;
   -webkit-box-shadow: 0 6px 6px -6px #0E1119;
   -moz-box-shadow: 0 6px 6px -6px #0E1119;
   box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td input:hover, .container td .picker:hover {
+table td input:hover, table td .picker:hover {
   background-color: #FFF842;
   color: #403E10;
   font-weight: bold;
@@ -163,8 +157,8 @@ h2 a {
 }
 
 @media (max-width: 800px) {
-  .container td:nth-child(4),
-  .container th:nth-child(4) {
+  table td:nth-child(4),
+  table th:nth-child(4) {
     display: none;
   }
 }
@@ -182,4 +176,9 @@ input:focus, .picker{
 
 .col-value:hover, .picker {
   border: none;
+}
+
+.alert {
+  width: 100%;
+  margin: 15px auto;
 }

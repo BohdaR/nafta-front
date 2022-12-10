@@ -1,19 +1,26 @@
-import React, {Fragment} from 'react';
+import React, {useState} from 'react';
 import TableName from "../TableName";
 import PaperTableRow from "./PaperTableRow";
 import {Alert} from "@mui/material";
+import FormDialog from "../FormDialog";
 
 const Papers = ({papers, ...props}) => {
+    const [errors, setErrors] = useState('');
+
     return (
-        <Fragment>
-            <TableName tableName="papers"/>
+        <div className="container">
+            {errors ?
             <Alert
-                onClose={() => {}}
-                style={{ width: 400}}
+                severity="error"
+                onClose={() => {setErrors('')}}
+                onClick={() => setErrors('')}
+                className="alert"
             >
-                This is a success alert — check it out!
-            </Alert>
-            <table className="container">
+                {errors}
+            </Alert> : null
+            }
+            <TableName tableName="papers"/>
+            <table>
                 <thead>
                 <tr>
                     <th><h1>id</h1></th>
@@ -27,18 +34,23 @@ const Papers = ({papers, ...props}) => {
                     <th><h1>binding type</h1></th>
                     <th><h1>manufacture country</h1></th>
                     <th><h1>status</h1></th>
+                    <th colSpan="2">
+                        <FormDialog papers={papers} {...props} />
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 {papers.map(paper =>
                     <PaperTableRow
                         key={paper.id}
-                        paper={paper} {...props}
+                        paper={paper}
+                        setErrors={setErrors}
+                        {...props}
                     />
                 )}
                 </tbody>
             </table>
-        </Fragment>
+        </div>
     );
 };
 

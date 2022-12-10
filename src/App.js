@@ -13,6 +13,8 @@ function App() {
     const [paperFormats, setPaperFormats] = useState([])
     const [countries, setCountries] = useState([])
 
+    const [showLoader, setShowLoader] = useState(false)
+
     useEffect(() => {
         get(`${process.env.REACT_APP_API_HOST}/api/v1/papers`)
             .then(
@@ -64,10 +66,14 @@ function App() {
 
     return (
         <Fragment>
-            <Header/>
+            <Header
+                showLoader={showLoader}
+            />
             <Papers
                 papers={papers}
+                setPapers={setPapers}
                 brands={brands}
+                setShowLoader={setShowLoader}
                 bindingTypes={bindingTypes}
                 paperTypes={paperTypes}
                 countries={countries}
