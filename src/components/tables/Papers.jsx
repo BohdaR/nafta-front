@@ -1,11 +1,18 @@
 import React, {Fragment} from 'react';
 import TableName from "../TableName";
-import SelectInput from "../SelectInput";
+import PaperTableRow from "./PaperTableRow";
+import {Alert} from "@mui/material";
 
-const Papers = ({papers, brands, bindingTypes}) => {
+const Papers = ({papers, ...props}) => {
     return (
         <Fragment>
             <TableName tableName="papers"/>
+            <Alert
+                onClose={() => {}}
+                style={{ width: 400}}
+            >
+                This is a success alert — check it out!
+            </Alert>
             <table className="container">
                 <thead>
                 <tr>
@@ -24,40 +31,11 @@ const Papers = ({papers, brands, bindingTypes}) => {
                 </thead>
                 <tbody>
                 {papers.map(paper =>
-                    <tr key={paper.id}>
-                        <td>
-                            <input name="pk"
-                                   value={paper.id}
-                                   type="text"
-                                   className="col-value"
-                            />
-                        </td>
-                        <td><input name=" description" value={paper.description} type=" text" className="col-value"/>
-                        </td>
-                        <td className=" large-field">
-                            <input name="name" value={paper.name} type=" text" className="col-value"/>
-                        </td>
-                        <td><input name="pieces" value={paper.pieces} type=" text" className="col-value"/></td>
-                        <td><input name="paper_type_id" value={paper.paper_type_id} type=" text"
-                                   className="col-value"/>
-                        </td>
-                        <td><input name="density" value={paper.density} type=" text" className="col-value"/></td>
-                        <td><input name="paper_format_id" value={paper.paper_format_id} type=" text"
-                                   className="col-value"/>
-                        </td>
-                        <td>
-                            <SelectInput name="brand_id" defaultValue={paper.brand_id} options={brands}/>
-                        </td>
-                        <td>
-                            <SelectInput name="binding_type_id" defaultValue={paper.binding_type_id} options={bindingTypes}/>
-                        </td>
-                        <td><input name="country_id" value={paper.country_id} type=" text" className="col-value"/>
-                        </td>
-                        <td><input name="status" value={paper.status} type=" text" className="col-value"/></td>
-                        <td><input value="Save" type=" submit" className="col-value"/></td>
-
-                        <td><input value="delete" type="submit" className="col-value"/></td>
-                    </tr>)}
+                    <PaperTableRow
+                        key={paper.id}
+                        paper={paper} {...props}
+                    />
+                )}
                 </tbody>
             </table>
         </Fragment>

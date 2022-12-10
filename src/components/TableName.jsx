@@ -3,7 +3,7 @@ import React from 'react';
 const TableName = ({tableName}) => {
     return (
         <h1>
-            <span className="blue"></span>{tableName}<span className="blue"></span><span className="yellow"></span>
+            <span className="blue">Table </span><span className="yellow">{tableName}</span>
         </h1>
     );
 };
