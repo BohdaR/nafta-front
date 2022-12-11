@@ -20,7 +20,6 @@ const Countries = ({countries, setCountries, setShowLoader, setErrors}) => {
                 <tr>
                     <th><h1>id</h1></th>
                     <th><h1>name</h1></th>
-                    <th><h1>country</h1></th>
                     <th colSpan="2">
                         <BaseForm
                             urlTableName="countries"
