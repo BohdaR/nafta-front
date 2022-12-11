@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SelectInput = ({name, defaultValue, options, handleChange}) => {
+const TableSelectInput = ({name, defaultValue, options, handleChange}) => {
     return (
         <select
             className="picker"
@@ -19,4 +19,4 @@ const SelectInput = ({name, defaultValue, options, handleChange}) => {
     );
 };
 
-export default SelectInput;
+export default TableSelectInput;

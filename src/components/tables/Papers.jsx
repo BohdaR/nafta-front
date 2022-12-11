@@ -1,25 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TableName from "../TableName";
-import PaperTableRow from "./PaperTableRow";
-import {Alert} from "@mui/material";
-import FormDialog from "../FormDialog";
+import PapersTableRow from "./rows/PapersTableRow";
+import PapersForm from "../forms/PapersForm";
 
-const Papers = ({papers, ...props}) => {
-    const [errors, setErrors] = useState('');
+const Papers = ({papers, setErrors, ...props}) => {
 
     return (
         <div className="container">
-            {errors ?
-            <Alert
-                severity="error"
-                onClose={() => {setErrors('')}}
-                onClick={() => setErrors('')}
-                className="alert"
-            >
-                {errors}
-            </Alert> : null
-            }
-            <TableName tableName="papers"/>
+            <TableName
+                tableName="papers"
+                setPapers={props.setPapers}
+                setShowLoader={props.setShowLoader}
+                setErrors={props.setErrors}
+            />
             <table>
                 <thead>
                 <tr>
@@ -35,13 +28,13 @@ const Papers = ({papers, ...props}) => {
                     <th><h1>manufacture country</h1></th>
                     <th><h1>status</h1></th>
                     <th colSpan="2">
-                        <FormDialog papers={papers} {...props} />
+                        <PapersForm papers={papers} {...props} />
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 {papers.map(paper =>
-                    <PaperTableRow
+                    <PapersTableRow
                         key={paper.id}
                         paper={paper}
                         setErrors={setErrors}

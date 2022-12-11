@@ -3,6 +3,9 @@ import Header from "./components/Header";
 import {Fragment, useEffect, useState} from "react";
 import Papers from "./components/tables/Papers";
 import {get} from "./useAPI/useAPI";
+import {Alert} from "@mui/material";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Brands from "./components/tables/Brands";
 
 
 function App() {
@@ -12,15 +15,24 @@ function App() {
     const [paperTypes, setPaperTypes] = useState([])
     const [paperFormats, setPaperFormats] = useState([])
     const [countries, setCountries] = useState([])
+    const [errors, setErrors] = useState('');
 
     const [showLoader, setShowLoader] = useState(false)
 
     useEffect(() => {
+        setShowLoader(true);
         get(`${process.env.REACT_APP_API_HOST}/api/v1/papers`)
             .then(
                 (response) => {
+                    setShowLoader(false);
                     setPapers(response.data);
                 })
+            .catch(
+                (errors) => {
+                    console.log(errors)
+                    setErrors('Cannot connect to the database!')
+                }
+            )
     }, []);
 
     useEffect(() => {
@@ -69,16 +81,49 @@ function App() {
             <Header
                 showLoader={showLoader}
             />
-            <Papers
-                papers={papers}
-                setPapers={setPapers}
-                brands={brands}
-                setShowLoader={setShowLoader}
-                bindingTypes={bindingTypes}
-                paperTypes={paperTypes}
-                countries={countries}
-                paperFormats={paperFormats}
-            />
+            <div className="container">
+                {errors ?
+                    <Alert
+                        severity="error"
+                        onClose={() => {
+                            setErrors('');
+                            setShowLoader(false)
+                        }}
+                        className="alert"
+                    >
+                        {errors}
+                    </Alert> : null
+                }
+            </div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={
+                        <Papers
+                            papers={papers}
+                            setPapers={setPapers}
+                            brands={brands}
+                            setShowLoader={setShowLoader}
+                            bindingTypes={bindingTypes}
+                            paperTypes={paperTypes}
+                            countries={countries}
+                            paperFormats={paperFormats}
+                            setErrors={setErrors}
+                        />
+                    }/>
+                    <Route path={"/brands"} element={
+                        <Brands
+                            brands={brands}
+                            setBrands={setBrands}
+                            setErrors={setErrors}
+                            countries={countries}
+                            setShowLoader={setShowLoader}
+                        > Hello</Brands>
+                    }/>
+                    {/*<Route path="blogs" element={<Blogs/>}/>*/}
+                    {/*<Route path="contact" element={<Contact/>}/>*/}
+                    {/*<Route path="*" element={<NoPage/>}/>*/}
+                </Routes>
+            </BrowserRouter>
         </Fragment>
     );
 }

@@ -1,8 +1,8 @@
 import React, {Fragment, useState} from 'react';
-import SelectInput from "../SelectInput";
-import {deleteRequest, post} from "../../useAPI/useAPI";
+import TableSelectInput from "../../inputs/TableSelectInput";
+import {deleteRow, updateRow} from "../../../useAPI/useAPI";
 
-const PaperTableRow = ({
+const PapersTableRow = ({
                            brands,
                            bindingTypes,
                            paperTypes,
@@ -26,51 +26,19 @@ const PaperTableRow = ({
     const [status, setStatus] = useState(paper.status)
     const [showRow, setShowRow] = useState(true)
 
-    const updateRow = (pk) => {
-        setShowLoader(true);
-        const data = {
-            description: description,
-            name: name,
-            pieces: pieces,
-            paper_type_id: paperTypeId,
-            density: density,
-            paper_format_id: paperFormatId,
-            brand_id: brandId,
-            binding_type_id: bindingTypeId,
-            country_id: countryId,
-            status: status
-        }
+    const data = {
+        description: description,
+        name: name,
+        pieces: pieces,
+        paper_type_id: paperTypeId,
+        density: density,
+        paper_format_id: paperFormatId,
+        brand_id: brandId,
+        binding_type_id: bindingTypeId,
+        country_id: countryId,
+        status: status
+    }
 
-        post(`${process.env.REACT_APP_API_HOST}/api/v1/papers/${pk}`, data)
-            .then(
-                (response) => {
-                    setShowLoader(false);
-                    setPaper(response.data);
-                })
-            .catch(
-                (errors) => {
-                    setShowLoader(false);
-                    setErrors(errors.response.data.errors.massage)
-                }
-            )
-    }
-    const deleteRow = (pk) => {
-        setShowLoader(true);
-        deleteRequest(`${process.env.REACT_APP_API_HOST}/api/v1/papers/${pk}`)
-            .then(
-                (response) => {
-                    setShowRow(false);
-                    setShowLoader(false);
-                    setPaper(response.data);
-                }
-            )
-            .catch(
-                (error) => {
-                    setShowLoader(false);
-                    setErrors(error)
-                }
-            )
-    }
 
     return (
         <Fragment>
@@ -87,20 +55,20 @@ const PaperTableRow = ({
                 </td>
                 <td>
                     <input
-                        name="description"
-                        value={description}
-                        type="text"
-                        className="col-value"
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </td>
-                <td className="large-field">
-                    <input
                         name="name"
                         value={name}
                         type="text"
                         className="col-value"
                         onChange={(e) => setName(e.target.value)}
+                    />
+                </td>
+                <td className="large-field">
+                    <input
+                        name="description"
+                        value={description}
+                        type="text"
+                        className="col-value"
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </td>
                 <td>
@@ -115,7 +83,7 @@ const PaperTableRow = ({
                     />
                 </td>
                 <td>
-                    <SelectInput
+                    <TableSelectInput
                         name="paper_type_id"
                         defaultValue={paperTypeId}
                         options={paperTypes}
@@ -133,7 +101,7 @@ const PaperTableRow = ({
                     />
                 </td>
                 <td>
-                    <SelectInput
+                    <TableSelectInput
                         name="paper_format_id"
                         defaultValue={paperFormatId}
                         options={paperFormats}
@@ -141,7 +109,7 @@ const PaperTableRow = ({
                     />
                 </td>
                 <td>
-                    <SelectInput
+                    <TableSelectInput
                         name="brand_id"
                         defaultValue={brandId}
                         options={brands}
@@ -149,7 +117,7 @@ const PaperTableRow = ({
                     />
                 </td>
                 <td>
-                    <SelectInput
+                    <TableSelectInput
                         name="binding_type_id"
                         defaultValue={bindingTypeId}
                         options={bindingTypes}
@@ -157,7 +125,7 @@ const PaperTableRow = ({
                     />
                 </td>
                 <td>
-                    <SelectInput
+                    <TableSelectInput
                         name="country_id"
                         defaultValue={countryId}
                         options={countries}
@@ -179,7 +147,13 @@ const PaperTableRow = ({
                         value="Save"
                         type="button"
                         className="col-value"
-                        onClick={() => updateRow(paperId)}
+                        onClick={() => updateRow(
+                            `${process.env.REACT_APP_API_HOST}/api/v1/papers/${paperId}`,
+                            data,
+                            setPaper,
+                            setShowLoader,
+                            setErrors
+                        )}
                     />
                 </td>
                 <td>
@@ -188,7 +162,12 @@ const PaperTableRow = ({
                         value="Delete"
                         type="button"
                         className="col-value"
-                        onClick={() => deleteRow(paperId)}
+                        onClick={() => deleteRow(
+                            `${process.env.REACT_APP_API_HOST}/api/v1/papers/${paperId}`,
+                            setShowRow,
+                            setShowLoader,
+                            setErrors
+                        )}
                     />
                 </td>
             </tr>: null
@@ -197,4 +176,4 @@ const PaperTableRow = ({
     );
 };
 
-export default PaperTableRow;
+export default PapersTableRow;

@@ -6,11 +6,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {useState} from "react";
 import {Alert} from "@mui/material";
-import FormSelectInput from "./inputs/FormSelectInput";
-import FormTextInput from "./inputs/FormTextInput";
-import {post} from "../useAPI/useAPI";
+import FormSelectInput from "../inputs/FormSelectInput";
+import FormTextInput from "../inputs/FormTextInput";
+import {createRow} from "../../useAPI/useAPI";
 
-export default function FormDialog({
+export default function PapersForm({
                                        setPapers,
                                        papers,
                                        brands,
@@ -33,31 +33,18 @@ export default function FormDialog({
 
     const [errors, setErrors] = useState('');
 
-    const handleCreate = () => {
-        const data = {
-            description: description,
-            name: name,
-            pieces: pieces,
-            paper_type_id: paperTypeId,
-            density: density,
-            paper_format_id: paperFormatId,
-            brand_id: brandId,
-            binding_type_id: bindingTypeId,
-            country_id: countryId,
-            status: status
-        }
 
-        post(`${process.env.REACT_APP_API_HOST}/api/v1/papers`, data)
-            .then(
-                (response) => {
-                    setPapers([...papers, response.data])
-                    setOpen(false);
-                })
-            .catch(
-                (errors) => {
-                    setErrors(errors.response.data.errors.massage)
-                }
-            )
+    const data = {
+        description: description,
+        name: name,
+        pieces: pieces,
+        paper_type_id: paperTypeId,
+        density: density,
+        paper_format_id: paperFormatId,
+        brand_id: brandId,
+        binding_type_id: bindingTypeId,
+        country_id: countryId,
+        status: status
     }
 
     const handleClickOpen = () => {
@@ -74,20 +61,19 @@ export default function FormDialog({
                 Add a new record
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                {errors ?
-                    <Alert
-                        severity="error"
-                        onClose={() => {
-                            setErrors('')
-                        }}
-                        onClick={() => setErrors('')}
-                        className="alert"
-                    >
-                        {errors}
-                    </Alert> : null
-                }
                 <DialogTitle>Create new record</DialogTitle>
                 <DialogContent>
+                    {errors ?
+                        <Alert
+                            severity="error"
+                            onClose={() => {
+                                setErrors('')
+                            }}
+                            className="alert"
+                        >
+                            {errors}
+                        </Alert> : null
+                    }
                     <FormTextInput
                         autoFocus
                         label="Name"
@@ -162,7 +148,14 @@ export default function FormDialog({
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleCreate}>Create</Button>
+                    <Button onClick={() => createRow(
+                        `${process.env.REACT_APP_API_HOST}/api/v1/papers`,
+                        data,
+                        papers,
+                        setPapers,
+                        setErrors,
+                        setOpen
+                    )}>Create</Button>
                 </DialogActions>
             </Dialog>
         </div>
