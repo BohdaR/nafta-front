@@ -9,9 +9,9 @@ const Papers = ({papers, setErrors, ...props}) => {
         <div className="container">
             <TableName
                 tableName="papers"
-                setPapers={props.setPapers}
+                setRows={props.setPapers}
                 setShowLoader={props.setShowLoader}
-                setErrors={props.setErrors}
+                setErrors={setErrors}
             />
             <table>
                 <thead>

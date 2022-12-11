@@ -1,6 +1,6 @@
 import React from 'react';
 import TableName from "../TableName";
-import BrandsFrom from "../forms/BrandsFrom";
+import BrandsForm from "../forms/BrandsForm";
 import BrandsTableRow from "./rows/BrandsTableRow";
 
 const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
@@ -8,7 +8,7 @@ const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
         <div className="container">
             <TableName
                 tableName="brands"
-                setPapers={setBrands}
+                setRows={setBrands}
                 setShowLoader={setShowLoader}
                 setErrors={setErrors}
             />
@@ -19,7 +19,7 @@ const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
                     <th><h1>name</h1></th>
                     <th><h1>country</h1></th>
                     <th colSpan="2">
-                        <BrandsFrom
+                        <BrandsForm
                             brands={brands}
                             setBrands={setBrands}
                             countries={countries}

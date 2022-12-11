@@ -6,6 +6,7 @@ import {get} from "./useAPI/useAPI";
 import {Alert} from "@mui/material";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Brands from "./components/tables/Brands";
+import Countries from "./components/tables/Countries";
 
 
 function App() {
@@ -117,11 +118,16 @@ function App() {
                             setErrors={setErrors}
                             countries={countries}
                             setShowLoader={setShowLoader}
-                        > Hello</Brands>
+                        />
                     }/>
-                    {/*<Route path="blogs" element={<Blogs/>}/>*/}
-                    {/*<Route path="contact" element={<Contact/>}/>*/}
-                    {/*<Route path="*" element={<NoPage/>}/>*/}
+                    <Route path={"/countries"} element={
+                        <Countries
+                            setCountries={setCountries}
+                            setErrors={setErrors}
+                            countries={countries}
+                            setShowLoader={setShowLoader}
+                        />
+                    }/>
                 </Routes>
             </BrowserRouter>
         </Fragment>

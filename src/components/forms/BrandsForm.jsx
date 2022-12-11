@@ -9,7 +9,7 @@ import FormSelectInput from "../inputs/FormSelectInput";
 import DialogActions from "@mui/material/DialogActions";
 import {createRow} from "../../useAPI/useAPI";
 
-const BrandsFrom = ({brands, setBrands, countries}) => {
+const BrandsForm = ({brands, setBrands, countries}) => {
     const [open, setOpen] = React.useState(false);
     const [errors, setErrors] = useState('');
     const [name, setName] = useState('')
@@ -79,4 +79,4 @@ const BrandsFrom = ({brands, setBrands, countries}) => {
     );
 };
 
-export default BrandsFrom;
+export default BrandsForm;

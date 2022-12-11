@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {loadRows} from "../useAPI/useAPI";
 
-const TableName = ({tableName, setPapers, setShowLoader, setErrors}) => {
+const TableName = ({tableName, setRows, setShowLoader, setErrors}) => {
     const [name, setName] = useState('')
 
     return (
@@ -17,7 +17,7 @@ const TableName = ({tableName, setPapers, setShowLoader, setErrors}) => {
                         loadRows(
                             `${process.env.REACT_APP_API_HOST}/api/v1/${tableName}?name=${e.target.value}`,
                             setShowLoader,
-                            setPapers,
+                            setRows,
                             setErrors,
                         );
                         setName(e.target.value)
