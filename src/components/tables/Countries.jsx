@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TableName from "../TableName";
-import CountriesForm from "../forms/CountriesForm";
 import CountriesTableRow from "./rows/CountriesTableRow";
+import FormTextInput from "../inputs/FormTextInput";
+import BaseForm from "../forms/BaseForm";
 
 const Countries = ({countries, setCountries, setShowLoader, setErrors}) => {
+    const [name, setName] = useState('')
+
     return (
         <div className="container">
             <TableName
@@ -19,10 +22,21 @@ const Countries = ({countries, setCountries, setShowLoader, setErrors}) => {
                     <th><h1>name</h1></th>
                     <th><h1>country</h1></th>
                     <th colSpan="2">
-                        <CountriesForm
-                            countries={countries}
-                            setCountries={setCountries}
-                        />
+                        <BaseForm
+                            url="countries"
+                            tableRows={countries}
+                            setTableRows={setCountries}
+                            data={{name: name}}
+                        >
+                            <FormTextInput
+                                autoFocus
+                                label="Name"
+                                name="name"
+                                value={name}
+                                type="text"
+                                handleChange={setName}
+                            />
+                        </BaseForm>
                     </th>
                 </tr>
                 </thead>

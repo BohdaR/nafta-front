@@ -4,11 +4,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import {Alert} from "@mui/material";
-import FormTextInput from "../inputs/FormTextInput";
 import DialogActions from "@mui/material/DialogActions";
 import {createRow} from "../../useAPI/useAPI";
 
-const BaseForm = ({tableName, ...props}) => {
+const BaseForm = ({url, tableRows, setTableRows, data, ...props}) => {
     const [open, setOpen] = React.useState(false);
     const [errors, setErrors] = useState('');
     const handleClickOpen = () => {
@@ -19,9 +18,6 @@ const BaseForm = ({tableName, ...props}) => {
         setOpen(false);
     };
 
-    const data = {
-        name: name,
-    }
     return (
         <div>
             <Button fullWidth variant="outlined" onClick={handleClickOpen}>
@@ -41,22 +37,15 @@ const BaseForm = ({tableName, ...props}) => {
                             {errors}
                         </Alert> : null
                     }
-                    <FormTextInput
-                        autoFocus
-                        label="Name"
-                        name="name"
-                        value={name}
-                        type="text"
-                        handleChange={setName}
-                    />
+                    {props.children}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => createRow(
-                        `${process.env.REACT_APP_API_HOST}/api/v1/${tableName}`,
+                        `${process.env.REACT_APP_API_HOST}/api/v1/${url}`,
                         data,
-                        countries,
-                        setCountries,
+                        tableRows,
+                        setTableRows,
                         setErrors,
                         setOpen
                     )}>Create</Button>
