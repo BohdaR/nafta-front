@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TableName from "../TableName";
-import BrandsForm from "../forms/BrandsForm";
 import BrandsTableRow from "./rows/BrandsTableRow";
+import FormTextInput from "../inputs/FormTextInput";
+import BaseForm from "../forms/BaseForm";
+import FormSelectInput from "../inputs/FormSelectInput";
 
 const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
+    const [name, setName] = useState('')
+    const [countryId, setCountryId] = useState('')
+
     return (
         <div className="container">
             <TableName
@@ -19,11 +24,28 @@ const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
                     <th><h1>name</h1></th>
                     <th><h1>country</h1></th>
                     <th colSpan="2">
-                        <BrandsForm
-                            brands={brands}
-                            setBrands={setBrands}
-                            countries={countries}
-                        />
+                        <BaseForm
+                            urlTableName="brands"
+                            tableRows={brands}
+                            setTableRows={setBrands}
+                            data={{name: name, country_id: countryId}}
+                        >
+                            <FormTextInput
+                                autoFocus
+                                label="Name"
+                                name="name"
+                                value={name}
+                                type="text"
+                                handleChange={setName}
+                            />
+                            <FormSelectInput
+                                value={countryId}
+                                label="Manufacture country"
+                                name="country_id"
+                                handleChange={setCountryId}
+                                options={countries}
+                            />
+                        </BaseForm>
                     </th>
                 </tr>
                 </thead>

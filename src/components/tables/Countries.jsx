@@ -23,7 +23,7 @@ const Countries = ({countries, setCountries, setShowLoader, setErrors}) => {
                     <th><h1>country</h1></th>
                     <th colSpan="2">
                         <BaseForm
-                            url="countries"
+                            urlTableName="countries"
                             tableRows={countries}
                             setTableRows={setCountries}
                             data={{name: name}}

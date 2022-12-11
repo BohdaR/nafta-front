@@ -7,7 +7,7 @@ import {Alert} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import {createRow} from "../../useAPI/useAPI";
 
-const BaseForm = ({url, tableRows, setTableRows, data, ...props}) => {
+const BaseForm = ({urlTableName, tableRows, setTableRows, data, ...props}) => {
     const [open, setOpen] = React.useState(false);
     const [errors, setErrors] = useState('');
     const handleClickOpen = () => {
@@ -42,7 +42,7 @@ const BaseForm = ({url, tableRows, setTableRows, data, ...props}) => {
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={() => createRow(
-                        `${process.env.REACT_APP_API_HOST}/api/v1/${url}`,
+                        `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}`,
                         data,
                         tableRows,
                         setTableRows,
