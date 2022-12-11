@@ -7,6 +7,7 @@ import {Alert} from "@mui/material";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Brands from "./components/tables/Brands";
 import Countries from "./components/tables/Countries";
+import BindingTypes from "./components/tables/BindingTypes";
 
 
 function App() {
@@ -103,28 +104,52 @@ function App() {
                             papers={papers}
                             setPapers={setPapers}
                             brands={brands}
-                            setShowLoader={setShowLoader}
                             bindingTypes={bindingTypes}
                             paperTypes={paperTypes}
                             countries={countries}
                             paperFormats={paperFormats}
                             setErrors={setErrors}
+                            setShowLoader={setShowLoader}
                         />
                     }/>
                     <Route path={"/brands"} element={
                         <Brands
                             brands={brands}
                             setBrands={setBrands}
-                            setErrors={setErrors}
                             countries={countries}
+                            setErrors={setErrors}
                             setShowLoader={setShowLoader}
                         />
                     }/>
                     <Route path={"/countries"} element={
                         <Countries
                             setCountries={setCountries}
-                            setErrors={setErrors}
                             countries={countries}
+                            setErrors={setErrors}
+                            setShowLoader={setShowLoader}
+                        />
+                    }/>
+                    <Route path={"/binding_types"} element={
+                        <BindingTypes
+                            setBindingTypes={setBindingTypes}
+                            bindingTypes={bindingTypes}
+                            setErrors={setErrors}
+                            setShowLoader={setShowLoader}
+                        />
+                    }/>
+                    <Route path={"/paper_formats"} element={
+                        <BindingTypes
+                            setPaperFormats={setPaperFormats}
+                            paperFormats={paperFormats}
+                            setErrors={setErrors}
+                            setShowLoader={setShowLoader}
+                        />
+                    }/>
+                    <Route path={"/paper_types"} element={
+                        <BindingTypes
+                            setPaperTypes={setPaperTypes}
+                            paperTypes={paperTypes}
+                            setErrors={setErrors}
                             setShowLoader={setShowLoader}
                         />
                     }/>
