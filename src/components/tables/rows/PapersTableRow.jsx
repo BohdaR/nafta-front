@@ -23,7 +23,6 @@ const PapersTableRow = ({
     const [brandId, setBrandId] = useState(paper.brand_id)
     const [bindingTypeId, setBindingTypeId] = useState(paper.binding_type_id)
     const [countryId, setCountryId] = useState(paper.country_id)
-    const [status, setStatus] = useState(paper.status)
     const [showRow, setShowRow] = useState(true)
 
     const data = {
@@ -36,7 +35,6 @@ const PapersTableRow = ({
         brand_id: brandId,
         binding_type_id: bindingTypeId,
         country_id: countryId,
-        status: status
     }
 
 
@@ -130,15 +128,6 @@ const PapersTableRow = ({
                         defaultValue={countryId}
                         options={countries}
                         handleChange={setCountryId}
-                    />
-                </td>
-                <td>
-                    <input
-                        name="status"
-                        value={status}
-                        type=" text"
-                        className="col-value"
-                        onChange={(e) => setStatus(e.target.value)}
                     />
                 </td>
                 <td>

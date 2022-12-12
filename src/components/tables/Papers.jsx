@@ -25,7 +25,6 @@ const Papers = ({
     const [brandId, setBrandId] = useState('')
     const [bindingTypeId, setBindingTypeId] = useState('')
     const [countryId, setCountryId] = useState('')
-    const [status, setStatus] = useState('')
 
     return (
         <div className="container">
@@ -48,7 +47,6 @@ const Papers = ({
                     <th><h1>brand</h1></th>
                     <th><h1>binding type</h1></th>
                     <th><h1>manufacture country</h1></th>
-                    <th><h1>status</h1></th>
                     <th colSpan="2">
                         <BaseForm
                             urlTableName="papers"
@@ -64,7 +62,6 @@ const Papers = ({
                                 brand_id: brandId,
                                 binding_type_id: bindingTypeId,
                                 country_id: countryId,
-                                status: status
                         }}
                         >
                             <FormTextInput
@@ -130,13 +127,6 @@ const Papers = ({
                                 name="country_id"
                                 handleChange={setCountryId}
                                 options={countries}
-                            />
-                            <FormTextInput
-                                label="Status"
-                                name="status"
-                                value={status}
-                                type="text"
-                                handleChange={setStatus}
                             />
                         </BaseForm>
                     </th>
