@@ -8,6 +8,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Brands from "./components/tables/Brands";
 import Countries from "./components/tables/Countries";
 import BindingTypes from "./components/tables/BindingTypes";
+import PaperFormats from "./components/tables/PaperFormats";
+import PaperTypes from "./components/tables/PaperTypes";
 
 
 function App() {
@@ -138,7 +140,7 @@ function App() {
                         />
                     }/>
                     <Route path={"/paper_formats"} element={
-                        <BindingTypes
+                        <PaperFormats
                             setPaperFormats={setPaperFormats}
                             paperFormats={paperFormats}
                             setErrors={setErrors}
@@ -146,7 +148,7 @@ function App() {
                         />
                     }/>
                     <Route path={"/paper_types"} element={
-                        <BindingTypes
+                        <PaperTypes
                             setPaperTypes={setPaperTypes}
                             paperTypes={paperTypes}
                             setErrors={setErrors}
