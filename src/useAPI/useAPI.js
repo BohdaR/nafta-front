@@ -1,21 +1,9 @@
 import axios from "axios";
 
-export const get = async (url) => {
-    return await axios.get(url);
-}
-
-export const post = async (url, body) => {
-    return await axios.post(url, body);
-}
-
-export const deleteRequest = async (url) => {
-    return await axios.delete(url);
-}
-
 export const loadRows = async (url, setShowLoader, setRows, setErrors,) => {
     setErrors('')
     setShowLoader(true);
-    get(url)
+    axios.get(url)
         .then(
             (response) => {
                 setShowLoader(false);
@@ -31,7 +19,7 @@ export const loadRows = async (url, setShowLoader, setRows, setErrors,) => {
 
 export const createRow = async (url, data, rows, setRows, setErrors, setOpen) => {
     setErrors('')
-    post(url, data)
+    axios.post(url, data)
         .then(
             (response) => {
                 setRows([...rows, response.data]);
@@ -48,7 +36,7 @@ export const createRow = async (url, data, rows, setRows, setErrors, setOpen) =>
 export const updateRow = async (url, body, setRow, setShowLoader, setErrors) => {
     setShowLoader(true);
     setErrors('');
-    post(url, body)
+    axios.post(url, body)
         .then(
             (response) => {
                 setRow(response.data);
@@ -66,7 +54,7 @@ export const updateRow = async (url, body, setRow, setShowLoader, setErrors) => 
 export const deleteRow = async (url, setShowRow, setShowLoader, setErrors) => {
     setShowLoader(true);
     setErrors('');
-    deleteRequest(url)
+    axios.delete(url)
         .then(
             () => {
                 setShowRow(false);
