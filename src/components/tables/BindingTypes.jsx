@@ -10,7 +10,7 @@ const BindingTypes = ({bindingTypes, setBindingTypes, setShowLoader, setErrors})
     return (
         <div className="container">
             <TableName
-                tableName="countries"
+                tableName="binding_types"
                 setRows={setBindingTypes}
                 setShowLoader={setShowLoader}
                 setErrors={setErrors}
@@ -22,7 +22,7 @@ const BindingTypes = ({bindingTypes, setBindingTypes, setShowLoader, setErrors})
                     <th><h1>name</h1></th>
                     <th colSpan="2">
                         <BaseForm
-                            urlTableName="countries"
+                            urlTableName="binding_types"
                             tableRows={bindingTypes}
                             setTableRows={setBindingTypes}
                             data={{name: name}}
@@ -43,6 +43,7 @@ const BindingTypes = ({bindingTypes, setBindingTypes, setShowLoader, setErrors})
                 {bindingTypes.map(bindingType =>
                     <BindingTypesRow
                         key={bindingType.id}
+                        urlTableName="binding_types"
                         bindingType={bindingType}
                         bindingTypes={bindingTypes}
                         setErrors={setErrors}

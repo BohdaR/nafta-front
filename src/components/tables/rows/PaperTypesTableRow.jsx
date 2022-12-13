@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {deleteRow, updateRow} from "../../../useAPI/useAPI";
 
-const PaperTypesTableRow = ({paperTypes, setErrors, setShowLoader, ...props}) => {
+const PaperTypesTableRow = ({paperTypes, setErrors, setShowLoader, urlTableName, ...props}) => {
     const [paperType, sePaperType] = useState(props.paperType)
 
     const [name, setName] = useState(paperType.name)
@@ -17,7 +17,7 @@ const PaperTypesTableRow = ({paperTypes, setErrors, setShowLoader, ...props}) =>
                 <tr>
                     <td>
                         <input
-                            name="country_id"
+                            name="pk"
                             value={paperTypeId}
                             type="text"
                             className="col-value"
@@ -40,7 +40,7 @@ const PaperTypesTableRow = ({paperTypes, setErrors, setShowLoader, ...props}) =>
                             type="button"
                             className="col-value"
                             onClick={() => updateRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${paperTypeId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${paperTypeId}`,
                                 data,
                                 sePaperType,
                                 setShowLoader,
@@ -54,7 +54,7 @@ const PaperTypesTableRow = ({paperTypes, setErrors, setShowLoader, ...props}) =>
                             type="button"
                             className="col-value"
                             onClick={() => deleteRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${paperTypeId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${paperTypeId}`,
                                 setShowRow,
                                 setShowLoader,
                                 setErrors

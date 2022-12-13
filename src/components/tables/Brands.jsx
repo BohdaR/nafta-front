@@ -54,6 +54,7 @@ const Brands = ({brands, setBrands, setShowLoader, setErrors, countries}) => {
                     <BrandsTableRow
                         key={brand.id}
                         brand={brand}
+                        urlTableName="brands"
                         countries={countries}
                         setErrors={setErrors}
                         setShowLoader={setShowLoader}

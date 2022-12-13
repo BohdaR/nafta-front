@@ -136,6 +136,7 @@ const Papers = ({
                 {papers.map(paper =>
                     <PapersTableRow
                         key={paper.id}
+                        urlTableName="papers"
                         paper={paper}
                         brands={brands}
                         bindingTypes={bindingTypes}

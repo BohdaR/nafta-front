@@ -10,7 +10,7 @@ const PaperTypes = ({paperTypes, setPaperTypes, setShowLoader, setErrors}) => {
     return (
         <div className="container">
             <TableName
-                tableName="paper_formats"
+                tableName="paper_types"
                 setRows={setPaperTypes}
                 setShowLoader={setShowLoader}
                 setErrors={setErrors}
@@ -22,7 +22,7 @@ const PaperTypes = ({paperTypes, setPaperTypes, setShowLoader, setErrors}) => {
                     <th><h1>name</h1></th>
                     <th colSpan="2">
                         <BaseForm
-                            urlTableName="paper_formats"
+                            urlTableName="paper_types"
                             tableRows={paperTypes}
                             setTableRows={setPaperTypes}
                             data={{name: name}}
@@ -43,6 +43,7 @@ const PaperTypes = ({paperTypes, setPaperTypes, setShowLoader, setErrors}) => {
                 {paperTypes.map(paperType =>
                     <PaperTypesTableRow
                         key={paperType.id}
+                        urlTableName="paper_types"
                         paperType={paperType}
                         paperTypes={paperTypes}
                         setErrors={setErrors}

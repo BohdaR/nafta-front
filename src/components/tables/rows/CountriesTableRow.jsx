@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {updateRow, deleteRow} from "../../../useAPI/useAPI";
 
-const CountriesTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
+const CountriesTableRow = ({countries, setErrors, setShowLoader, urlTableName, ...props}) => {
     const [country, setCountry] = useState(props.country)
 
     const [name, setName] = useState(country.name)
@@ -41,7 +41,7 @@ const CountriesTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
                             type="button"
                             className="col-value"
                             onClick={() => updateRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/countries/${countryId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${countryId}`,
                                 data,
                                 setCountry,
                                 setShowLoader,
@@ -55,7 +55,7 @@ const CountriesTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
                             type="button"
                             className="col-value"
                             onClick={() => deleteRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/countries/${countryId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${countryId}`,
                                 setShowRow,
                                 setShowLoader,
                                 setErrors

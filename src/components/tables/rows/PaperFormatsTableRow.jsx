@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {deleteRow, updateRow} from "../../../useAPI/useAPI";
 
-const PaperFormatsTableRow = ({paperFormats, setErrors, setShowLoader, ...props}) => {
+const PaperFormatsTableRow = ({paperFormats, urlTableName, setErrors, setShowLoader, ...props}) => {
     const [paperFormat, setPaperFormat] = useState(props.paperFormat)
 
     const [name, setName] = useState(paperFormat.name)
@@ -40,7 +40,7 @@ const PaperFormatsTableRow = ({paperFormats, setErrors, setShowLoader, ...props}
                             type="button"
                             className="col-value"
                             onClick={() => updateRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${paperFormatId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${paperFormatId}`,
                                 data,
                                 setPaperFormat,
                                 setShowLoader,
@@ -54,7 +54,7 @@ const PaperFormatsTableRow = ({paperFormats, setErrors, setShowLoader, ...props}
                             type="button"
                             className="col-value"
                             onClick={() => deleteRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${paperFormatId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${paperFormatId}`,
                                 setShowRow,
                                 setShowLoader,
                                 setErrors

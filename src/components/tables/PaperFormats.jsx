@@ -42,6 +42,7 @@ const PaperFormats = ({paperFormats, setPaperFormats, setShowLoader, setErrors})
                 <tbody>
                 {paperFormats.map(paperFormat =>
                     <PaperFormatsTableRow
+                        urlTableName="paper_formats"
                         key={paperFormat.id}
                         paperFormat={paperFormat}
                         paperFormats={paperFormats}

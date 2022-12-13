@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {deleteRow, updateRow} from "../../../useAPI/useAPI";
 
-const BindingTypesRow = ({bindingTypes, setErrors, setShowLoader, ...props}) => {
+const BindingTypesRow = ({bindingTypes, setErrors, setShowLoader, urlTableName, ...props}) => {
     const [bindingType, setBindingType] = useState(props.bindingType)
 
     const [name, setName] = useState(bindingType.name)
@@ -18,7 +18,7 @@ const BindingTypesRow = ({bindingTypes, setErrors, setShowLoader, ...props}) => 
                 <tr>
                     <td>
                         <input
-                            name="country_id"
+                            name="pk"
                             value={bindingTypeId}
                             type="text"
                             className="col-value"
@@ -41,7 +41,7 @@ const BindingTypesRow = ({bindingTypes, setErrors, setShowLoader, ...props}) => 
                             type="button"
                             className="col-value"
                             onClick={() => updateRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${bindingTypeId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${bindingTypeId}`,
                                 data,
                                 setBindingType,
                                 setShowLoader,
@@ -55,7 +55,7 @@ const BindingTypesRow = ({bindingTypes, setErrors, setShowLoader, ...props}) => 
                             type="button"
                             className="col-value"
                             onClick={() => deleteRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/binding_types/${bindingTypeId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${bindingTypeId}`,
                                 setShowRow,
                                 setShowLoader,
                                 setErrors

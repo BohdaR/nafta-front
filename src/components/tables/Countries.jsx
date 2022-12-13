@@ -43,6 +43,7 @@ const Countries = ({countries, setCountries, setShowLoader, setErrors}) => {
                 {countries.map(country =>
                     <CountriesTableRow
                         key={country.id}
+                        urlTableName="countries"
                         country={country}
                         countries={countries}
                         setErrors={setErrors}

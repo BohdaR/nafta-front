@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import TableSelectInput from "../../inputs/TableSelectInput";
 import {updateRow, deleteRow} from "../../../useAPI/useAPI";
 
-const BrandsTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
+const BrandsTableRow = ({countries, setErrors, setShowLoader, urlTableName, ...props}) => {
     const [brand, setBrand] = useState(props.brand)
 
     const [name, setName] = useState(brand.name)
@@ -52,7 +52,7 @@ const BrandsTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
                             type="button"
                             className="col-value"
                             onClick={() => updateRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/brands/${brandId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${brandId}`,
                                 data,
                                 setBrand,
                                 setShowLoader,
@@ -66,7 +66,7 @@ const BrandsTableRow = ({countries, setErrors, setShowLoader, ...props}) => {
                             type="button"
                             className="col-value"
                             onClick={() => deleteRow(
-                                `${process.env.REACT_APP_API_HOST}/api/v1/brands/${brandId}`,
+                                `${process.env.REACT_APP_API_HOST}/api/v1/${urlTableName}/${brandId}`,
                                 setShowRow,
                                 setShowLoader,
                                 setErrors
