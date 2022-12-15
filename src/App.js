@@ -2,7 +2,7 @@ import './styles/App.css';
 import Header from "./components/Header";
 import {Fragment, useEffect, useState} from "react";
 import Papers from "./components/tables/Papers";
-import {get} from "./useAPI/useAPI";
+import {loadRows} from "./useAPI/useAPI";
 import {Alert} from "@mui/material";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Brands from "./components/tables/Brands";
@@ -24,59 +24,27 @@ function App() {
     const [showLoader, setShowLoader] = useState(false)
 
     useEffect(() => {
-        setShowLoader(true);
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/papers`)
-            .then(
-                (response) => {
-                    setShowLoader(false);
-                    setPapers(response.data);
-                })
-            .catch(
-                (errors) => {
-                    console.log(errors)
-                    setErrors('Cannot connect to the database!')
-                }
-            )
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/papers`, setShowLoader, setPapers, setErrors)
     }, []);
 
     useEffect(() => {
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/paper_types`)
-            .then(
-                (response) => {
-                    setPaperTypes(response.data);
-                })
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/paper_types`, setShowLoader, setPaperTypes, setErrors)
     }, []);
 
     useEffect(() => {
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/paper_formats`)
-            .then(
-                (response) => {
-                    setPaperFormats(response.data);
-                })
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/paper_formats`, setShowLoader, setPaperFormats, setErrors)
     }, []);
 
     useEffect(() => {
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/countries`)
-            .then(
-                (response) => {
-                    setCountries(response.data);
-                })
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/countries`, setShowLoader, setCountries, setErrors)
     }, []);
 
     useEffect(() => {
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/brands`)
-            .then(
-                (response) => {
-                    setBrands(response.data);
-                })
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/brands`, setShowLoader, setBrands, setErrors)
     }, []);
 
     useEffect(() => {
-        get(`${process.env.REACT_APP_API_HOST}/api/v1/binding_types`)
-            .then(
-                (response) => {
-                    setBindingTypes(response.data);
-                })
+        loadRows(`${process.env.REACT_APP_API_HOST}/api/v1/binding_types`, setShowLoader, setBindingTypes, setErrors)
     }, []);
 
 
