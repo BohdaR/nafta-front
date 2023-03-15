@@ -24,7 +24,19 @@ const Header = ({showLoader}) => {
                 </div>
             </header>
             {showLoader ?
+
+
+
+
+
+
+
+
+
+
+
             <LinearIndeterminate/> : null}
+
         </Fragment>
     );
 };
